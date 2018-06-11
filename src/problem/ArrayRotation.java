@@ -161,42 +161,56 @@ public class ArrayRotation {
 	static int maxHamming(int[] arr) {
 		int n = arr.length, val = 0;
 		int []temp = arr.clone();
-			        
-		while(  ) {
-			for (int i = 0; i < n; i++) {
+		int l = n-1,distance = 0,max_dist = Integer.MIN_VALUE;	 
+		
+		while( l > 0 ) {
+			val = temp[0];
+			for (int i = 0; i < n-1; i++) {
 			   	temp[i] = temp[i + 1];
 			}
-			arr[n - 1] = val;
+			temp[n - 1] = val;
+			printArr(arr);
+			printArr(temp);
+			System.out.println("***********************");
+			for (int i = 0; i < n; i++) {
+			   	if(arr[i] != temp[i]) {
+			   		distance++;
+			   	}
+			}
+			System.out.println(distance+"   "+max_dist);
+			if(distance > max_dist) {
+				System.out.println("sssssssssssssssssss");
+				max_dist = distance;
+			}
+			distance = 0;
+			l--;
 		}
-		return 0;
+		return max_dist;
 	}
 
 	static void reverseArray(int[] arr, int l, int h) {
-		System.out.println(l + "  " + h);
+		//System.out.println(l + "  " + h);
 		while (l < h) {
 			int temp = arr[l];
 			arr[l] = arr[h];
 			arr[h] = temp;
 			l++;
 			h--;
-			System.out.println("****************************");
-			printArr(arr);
-			System.out.println("****************************");
 		}
 
 	}
 
 	static void rightReverse(int arr[]) {
 		int pivot = findPivot(arr, 0, arr.length);
-		System.out.println("reverse:  " + pivot);
+		//System.out.println("reverse:  " + pivot);
 		reverseArray(arr, 0, pivot);
-		printArr(arr);
+		//printArr(arr);
 		reverseArray(arr, pivot + 1, arr.length - 1);
 		reverseArray(arr, 0, arr.length - 1);
 	}
 
 	public static void main(String[] args) {
-		int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+		int arr[] = { 2 ,4 ,8 ,0 };
 		// leftRotate(arr,3);
 		// System.out.println(findPivot(arr, 0, arr.length));
 		int sortArr[] = { 10, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -208,6 +222,6 @@ public class ArrayRotation {
 		//System.out.println(maxSumOptimized(test_arr));
 		//rightReverse(test_arr);
 		//printArr(test_arr);
-		maxHamming(arr);
+		System.out.println(maxHamming(arr));
 	}
 }
